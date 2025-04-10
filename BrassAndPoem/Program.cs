@@ -1,5 +1,4 @@
-﻿
-//create a "products" variable here to include at least five Product instances. Give them appropriate ProductTypeIds.
+﻿//create a "products" variable here to include at least five Product instances. Give them appropriate ProductTypeIds.
 List<Product> products = new List<Product>()
 {
     new Product()
@@ -90,7 +89,6 @@ while (choice != "5")
 5. Exit");
     }
 
-
     void DisplayAllProducts(List<Product> products, List<ProductType> productTypes)
     {
         for (int i = 0; i < products.Count; i++)
@@ -112,14 +110,57 @@ while (choice != "5")
 
     void AddProduct(List<Product> products, List<ProductType> productTypes)
     {
-        throw new NotImplementedException();
+        Console.WriteLine("Enter product name:");
+        string name = Console.ReadLine();
+
+        Console.WriteLine("Enter product price:");
+        decimal price = decimal.Parse(Console.ReadLine());
+
+        Console.WriteLine("Enter product type ID:");
+        int productTypeId = int.Parse(Console.ReadLine());
+
+        Product newProduct = new Product
+        {
+            Name = name,
+            Price = price,
+            ProductTypeId = productTypeId
+        };
+
+        products.Add(newProduct);
     }
 
     void UpdateProduct(List<Product> products, List<ProductType> productTypes)
     {
-        throw new NotImplementedException();
-    }
+        DisplayAllProducts(products, productTypes);
+        Console.WriteLine("Please enter the number of the product you want to update:");
+        string input = Console.ReadLine();
+        int index = int.Parse(input) - 1;
+        Product productToUpdate = products[index];
 
+        Console.WriteLine($@"Enter new name for {productToUpdate.Name}.
+        Press Enter to keep the current name.");
+        string newName = Console.ReadLine();
+        if (!string.IsNullOrEmpty(newName))
+        {
+            productToUpdate.Name = newName;
+        }
+
+        Console.WriteLine($@"Enter new price for {productToUpdate.Price}.
+        Press Enter to keep the current price.");
+        string newPrice = Console.ReadLine();
+        if (!string.IsNullOrEmpty(newPrice))
+        {
+            productToUpdate.Price = decimal.Parse(newPrice);
+        }
+
+        Console.WriteLine($@"Enter new type for {productToUpdate.ProductTypeId}.
+        Press Enter to keep the current type.");
+        string newType = Console.ReadLine();
+        if (!string.IsNullOrEmpty(newType))
+        {
+            productToUpdate.ProductTypeId = int.Parse(newType);
+        }
+    }
 
 }
 // don't move or change this!
